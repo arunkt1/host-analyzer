@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Host Analyzer-BaT Team Internal Tool</title>
+    <link rel="stylesheet" type="text/css" href="css/tornado_view.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-combobox.css">
+</head>
+
+<body>
+
+<div class="container-fluid well" id="control-bar">
+
+<div class="row" style="background-color:rgb(230, 230, 230);"  >
+                <form class="form-inline" role="form">
+                    <div class="form-group col-md-2">BRC:
+    <label class="radio-inline">
+      <input value="PRODUCTION" type="radio" name="BRC_select">PRODUCTION
+    </label>
+    <label class="radio-inline">
+      <input value="PREPROD" type="radio" name="BRC_select">PREPROD
+    </label>
+  </form>
+</div>
+ </div>
+    <div class="row" style="background-color:rgb(230, 230, 230);"  >
+
+                  
+        <div class="col-md-6" id="rectangle_one" style="position: relative;">
+        
+            
+                <form class="form-inline" role="form">
+                    <div class="form-group col-md-2">
+                        <select class="combobox form-control" id="ddlViewBy" name="inline">
+                            <option value="" selected="selected">cluster</option>
+                            <option value="btools">Btools</option>
+                            <option value="bmain">Bmain</option>
+                            <option value="bworking01">Bworking01</option>
+                            <option value="cluster_x">Cluster_x</option>
+                            <option value="bluster_x">Bluster_y</option>
+                        </select>
+                   </div>
+                   <div class="form-group col-md-2">
+                       <select required="required" class="combobox form-control" id="ddlViewBy" name="inline">
+                           <option value="" selected="selected">job</option>
+                           <option value="btools">Btools</option>
+                           <option value="bmain">Bmain</option>
+                           <option value="bworking01">Bworking01</option>
+                           <option value="cluster_x">Cluster_x</option>
+                           <option value="bluster_x">Bluster_y</option>
+                       </select>
+                  </div>
+                   <div class="form-group col-md-2">
+                       <select class="combobox form-control" id="ddlViewBy" name="inline">
+                           <option value="" selected="selected">arch</option>
+                           <option value="btools">glnxa64</option>
+                           <option value="bmain">maci64</option>
+                           <option value="bworking01">win64</option>
+                       </select>
+                       
+                       
+                  </div>
+                </form>
+            </div>  
+               <div class="col-md-2" id="rectangle_one">
+                   <button type="button" class="btn btn-default" onclick="myFunction()">Plot!</button>
+               </div>
+        <div class="col-md-4" id="rectangle_two" style="position: relative; top: 20px; left: 2cm">
+            
+            
+            <form class="form-inline" role="form">
+                    <div class="form-group">View:
+    <label class="radio-inline">
+      <input value="tornado-pane" type="radio" name="data_perspective">Tornado
+    </label>
+    <label class="radio-inline">
+      <input value="Session" type="radio" name="data_perspective">Session
+    </label>
+        <label class="radio-inline">
+      <input value="Pie" type="radio" name="data_perspective">Pie
+    </label>
+  </form>
+            
+       </div>
+</div>
+</div>
+</div>
+<div class="container-fluid well view_pane" id="tornado-pane" style="background-color:rgb(253, 253, 253);">    
+    <div class="row">
+        <div class="col-md-8" id="rectangle_three" style="background: white;" >
+
+        </div>
+        <div class="col-md-4"  style="border-style: outset; border-width: 0.25cm; background: orange;" > 
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="rectangle_four" style="background: white;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="rectangle_five" style="background: white;" ></div>
+            </div>         
+        </div>
+      
+    </div>
+</div>
+<div class="container-fluid well view_pane" id="session_pane" style="background-color:rgb(253, 253, 253);">    
+    <div class="row">
+        <div class="col-md-4" id="rectangle_six" style="background: white;" >
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="h_att" style="height= 33%; background: orange;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="c_all" style="height= 33%; background: pink;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="s_sum" style="height= 33%; background: yellow;" > </div>
+            </div>            
+        </div>
+        <div class="col-md-4" id="rectangle_seven" style="background: white;" >
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="h_eff" style="background: black;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="s_usa" style="background: black;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="c_typ" style="background: black;" > </div>
+            </div> 
+        </div>
+        <div class="col-md-4" id="rectangle_eight" style="background: white;" >
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="t_att" style="background: blue ;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="a_inf" style="background: blue;" > </div>
+            </div> 
+        </div>
+      
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap-combobox.js"></script>
+
+
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js"></script>
+<script src="js/tornado_view.js"></script>
+<script src="js/control_panel.js"></script>
+<script src="js/session_view.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Host Analyzer-BaT Team Internal Tool</title>
+    <link rel="stylesheet" type="text/css" href="css/tornado_view.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-combobox.css">
+    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/pie_view.css"> -->
+</head>
+
+<body>
+
+<div class="container-fluid well" id="control-bar">
+
+    <div class="row">
+        <div class="col-md-8" id="rectangle_info" style="position: relative;">
+            <form class="form-inline" role="form">
+                <div class="form-group col-md-4">BRC:
+                    <label class="radio-inline">
+                        <input value="PRODUCTION" type="radio" name="BRC_select" checked="checked">PRODUCTION
+                    </label>
+                    <label class="radio-inline">
+                        <input value="PREPROD" type="radio" name="BRC_select">PREPROD
+                    </label>
+                </div>
+            </form>
+            <form class="form-inline" role="form">
+                <div class="form-group col-md-4">Test Type
+                    <label class="radio-inline">
+                        <input value="test" type="radio" name="test_select" checked="checked">Test
+                    </label>
+                    <label class="radio-inline">
+                        <input value="smoke" type="radio" name="test_select">Smoke
+                    </label>
+                </div>
+            </form>
+          </div>
+         <div class="col-md-4" id="rectangle_two" style="position: relative;">
+            <form class="form-inline" role="form">
+                <div class="form-group">View:
+                    <label class="radio-inline">
+                        <input value="tornado_pane" type="radio" name="data_perspective" checked="checked">Tornado
+                    </label>
+                    <label class="radio-inline">
+                        <input value="pie_pane" type="radio" name="data_perspective">Pie
+                    </label>
+                    <label class="radio-inline">
+                        <input value="session_pane" type="radio" name="data_perspective">Session
+                    </label>
+
+                </div>
+            </form>         
+         </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6" id="rectangle_one" style="position: relative;">
+        
+            
+                <form class="form-inline" role="form">
+                    <div class="form-group col-md-3">
+                        <select class="combobox form-control" id="cluster_dropdown" name="inline">
+                            <option value="" selected="selected">cluster</option>
+                        </select>
+                   </div>
+                   <div class="form-group col-md-3">
+                       <select required="required" class="combobox form-control" id="job_dropdown" name="inline">
+                           <option value="" id="defJob" selected="selected">job</option>
+                       </select>
+                  </div>
+                   <div class="form-group col-md-3">
+                       <select class="combobox form-control" id="arch_dropdown" name="inline">
+                           <option value="" id="defArch" selected="selected">arch</option>
+                       </select>
+                       
+                       
+                  </div>
+                </form>
+                
+        </div>  
+        <div class="col-md-2" id="rectangle_plot">
+               <button type="button" class="btn btn-default" onclick="plotGraph()">Plot!</button>
+        </div>
+        <div class="col-md-4" id="rectangle_options" style="position: relative; top: 20px; left: 2cm"> 
+            <label class="checkbox-inline"><input name = "singleuse" type="checkbox" value="">SINGLEUSE</label>
+            <label class="checkbox-inline"><input name = "core" type="checkbox" value="">CORE</label>
+            <label class="checkbox-inline"><input name = "pool" type="checkbox" value="">POOL</label>
+            <label class="checkbox-inline"><input name = "tornado" type="checkbox" value="">Tornado</label>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid well view_pane" id="tornado_pane" style="background-color:rgb(253, 253, 253);">    
+    <div class="row">
+        <div class="col-md-8" id="rectangle_three" style="background: white;" >
+        </div>
+        <div class="col-md-4"  style="border-style: outset; border-width: 0.25cm; background: orange;" > 
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="rectangle_four" style="background: white;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12" id="rectangle_five" style="background: white;" ></div>
+            </div>         
+        </div>
+      
+    </div>
+</div>
+
+<!-- <div class="container-fluid well view_pane" id="session_pane" style="background-color:rgb(253, 253, 253);">    
+    <div class="row">
+        <div class="col-md-4" id="rectangdfds" style="background: white;" >
+            <div class="row" style="background-color:rgb(252, 252, 252);">Host Attributes
+                <div class="col-md-12 well" id="h_att" style="height= 33%; background: white;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">Cores Allocation
+                <div class="col-md-12 well" id="c_all" style="height= 33%; background: white;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">Sessions Summary
+                <div class="col-md-12 well" id="s_sum" style="height= 33%; background: white;" > </div>
+            </div>            
+        </div>
+        <div class="col-md-4" id="rectangsdfsq" style="background: white;" >Host Efficiency
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12 well" id="h_eff" style="background: white;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">Singleuse Usage
+                <div class="col-md-12 well" id="s_usa" style="background: white;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">Cores Type
+                <div class="col-md-12 well" id="c_typ" style="background: white;" > </div>
+            </div> 
+        </div>
+        <div class="col-md-4" id="rectangle_eight" style="background: white;" >Test Attributes
+            <div class="row" style="background-color:rgb(252, 252, 252);">
+                <div class="col-md-12 well" id="t_att" style="background: white ;" > </div>
+            </div>
+            <div class="row" style="background-color:rgb(252, 252, 252);">Allocation Info
+                <div class="col-md-12 well" id="a_inf" style="background: white;" > </div>
+            </div> 
+        </div>
+      
+    </div>
+</div> -->
+
+<div class="container-fluid view_pane" id="pie_pane">    
+    <div class="row">
+        <div class="col-md-4" id="rectangdfds" style="background: white;" >
+            <div class="row well">Host Attributes
+                <div class="col-md-12" id="h_att" style="height= 33%; background: white;" > </div>
+            </div>
+            <div class="row well">Cores Allocation
+                <div class="col-md-12" id="c_all" style="height= 33%; background: white;" > </div>
+            </div>
+            <div class="row well">Sessions Summary
+                <div class="col-md-12" id="s_sum" style="height= 33%; background: white;" > </div>
+            </div>            
+        </div>
+        <div class="col-md-4" id="rectangsdfsq" >
+            <div class="row well">Host Efficiency
+                <div class="col-md-12" id="h_eff" style="background: white;" > </div>
+            </div>
+            <div class="row well">Singleuse Usage
+                <div class="col-md-12" id="s_usa" style="background: white;" > </div>
+            </div>
+            <div class="row well">Cores Type
+                <div class="col-md-12" id="c_typ" style="background: white;" > </div>
+            </div> 
+        </div>
+        <div class="col-md-4" id="rectangle_eight">
+            <div class="row well">Test Attributes
+                <div class="col-md-12" id="t_att" style="background: white ;" > </div>
+            </div>
+            <div class="row well">Allocation Info
+                <div class="col-md-12" id="a_inf" style="background: white;" > </div>
+            </div> 
+        </div>
+      
+    </div>
+</div>
+
+<div class="container-fluid well view_pane" id="session_pane" style="background-color:rgb(253, 253, 253);">    
+    <div class="row well">Sessions
+        <div class="col-md-12" id="rectangle_nine" style="background: white;" >
+        </div>     
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script src="js/d3.tip.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js"></script>
+<script src="js/tornado_view.js"></script>
+<script src="js/control_panel.js"></script>
+<!-- <script src="js/session_view.js"></script> -->
+<script src="js/bootstrap-combobox.js"></script>
+<script>$('.combobox').combobox();</script>
+<script src="js/pie_view.js"></script>
+<script src="js/session_view.js"></script>
+<script src="js/graph.js"></script>
+</body>
+</html>
+
+
+
